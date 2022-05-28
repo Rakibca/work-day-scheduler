@@ -13,12 +13,14 @@ let time_15 = 15;
 let time_16 = 16;
 let time_17 = 17;
 
+// Display current time every 1 second
 function displayTime() {
   let rightNow = moment().format("MMM DD, YYYY [at] hh:mm:ss a");
   timeDisplayEl.text(rightNow);
 }
 setInterval(displayTime, 1000);
 
+// Function to check if a time slot is before or after current time
 let timeCheck = function() {
   for (let i = 0; i < 9; i++) {
     let startTime = moment(times[i], "HH:mma");
@@ -34,6 +36,7 @@ let timeCheck = function() {
 }
 timeCheck();
 
+// checks if a time slot falls within current time
 if (hourInteger == time_9) {
   $(".container").children().eq(1).children().eq(1).addClass("present");
 } else if (hourInteger == time_10) {
@@ -54,12 +57,14 @@ if (hourInteger == time_9) {
   $(".container").children().eq(9).children().eq(1).addClass("present");
 }
 
+// Reloads website after 2 seconds
 function siteReload() {
   setTimeout(function() {
       window.location.reload();
   }, 2000);
 }
 
+// On click of a save button, event description saved to localStorage
 $(document).ready(function() {
   $(".saveBtn").on("click", function() {
     console.log(this);
@@ -71,6 +76,7 @@ $(document).ready(function() {
     siteReload();
   })
 
+// Retrieves stored event descriptions from localStorage
   $("#9am-block .description").val(localStorage.getItem("9am-block"));
   $("#10am-block .description").val(localStorage.getItem("10am-block"));
   $("#11am-block .description").val(localStorage.getItem("11am-block"));
