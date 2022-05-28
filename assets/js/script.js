@@ -19,50 +19,56 @@ function displayTime() {
 }
 setInterval(displayTime, 1000);
 
-const timeCheck = function() {
+let timeCheck = function() {
   for (let i = 0; i < 9; i++) {
     let startTime = moment(times[i], "HH:mma");
-    console.log(startTime.toString());
     let start = startTime.toString();
-    console.log(atomic > start);
-    console.log(atomic < start);
-    console.log(atomic == start);
+    //console.log(atomic > start);
+    //console.log(atomic < start);
     if (atomic > start) {
-      $(".scheduler-container").children().eq(i + 1).children().eq(1).addClass("past");
+      $(".container").children().eq(i + 1).children().eq(1).addClass("past");
     } else if (atomic < start) {
-      $(".scheduler-container").children().eq(i + 1).children().eq(1).addClass("future");
+      $(".container").children().eq(i + 1).children().eq(1).addClass("future");
     }
-    //$(".scheduler-container").children().eq(i + 1).children().eq(1).addClass("present");}
   }
 }
 timeCheck();
 
 if (hourInteger == time_9) {
-  $(".scheduler-container").children().eq(1).children().eq(1).addClass("present");
+  $(".container").children().eq(1).children().eq(1).addClass("present");
 } else if (hourInteger == time_10) {
-  $(".scheduler-container").children().eq(2).children().eq(1).addClass("present");
+  $(".container").children().eq(2).children().eq(1).addClass("present");
 } else if (hourInteger == time_11) {
-  $(".scheduler-container").children().eq(3).children().eq(1).addClass("present");
+  $(".container").children().eq(3).children().eq(1).addClass("present");
 } else if (hourInteger == time_12) {
-  $(".scheduler-container").children().eq(4).children().eq(1).addClass("present");
+  $(".container").children().eq(4).children().eq(1).addClass("present");
 } else if (hourInteger == time_13) {
-  $(".scheduler-container").children().eq(5).children().eq(1).addClass("present");
+  $(".container").children().eq(5).children().eq(1).addClass("present");
 } else if (hourInteger == time_14) {
-  $(".scheduler-container").children().eq(6).children().eq(1).addClass("present");
+  $(".container").children().eq(6).children().eq(1).addClass("present");
 } else if (hourInteger == time_15) {
-  $(".scheduler-container").children().eq(7).children().eq(1).addClass("present");
+  $(".container").children().eq(7).children().eq(1).addClass("present");
 } else if (hourInteger == time_16) {
-  $(".scheduler-container").children().eq(8).children().eq(1).addClass("present");
+  $(".container").children().eq(8).children().eq(1).addClass("present");
 } else if (hourInteger == time_17) {
-  $(".scheduler-container").children().eq(9).children().eq(1).addClass("present");
+  $(".container").children().eq(9).children().eq(1).addClass("present");
+}
+
+function siteReload() {
+  setTimeout(function() {
+      window.location.reload();
+  }, 2000);
 }
 
 $(document).ready(function() {
   $(".saveBtn").on("click", function() {
     console.log(this);
-    let eventDesc = $(this).siblings(".description").val(); // taken the change from the sibling html description attribute
-    let time = $(this).parent().attr("id"); // taken the change from the parent html id attribute
+    let eventDesc = $(this).siblings(".description").val();
+    let time = $(this).parent().attr("id");
     localStorage.setItem(time, eventDesc);
+    $(".message").append("<strong>Appointment Added to localStorage</strong>");
+    $(".message").css({"color": "red"});
+    siteReload();
   })
 
   $("#9am-block .description").val(localStorage.getItem("9am-block"));
